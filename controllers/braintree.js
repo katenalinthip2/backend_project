@@ -12,7 +12,7 @@ const gateway = braintree.connect({
 exports.generateToken = (req, res) => {
     gateway.clientToken.generate({}, function (err, response) {
         if (err) {
-            res.status(500).send(err);
+            res.send(response);
         } else {
             res.send(response);
         }
@@ -33,7 +33,7 @@ exports.processPayment = (req, res) => {
         },
         (error, result) => {
             if (error) {
-                res.status(500).json(error);
+                res.json(result);
             } else {
                 res.json(result);
             }
